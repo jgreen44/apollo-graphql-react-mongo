@@ -1,8 +1,25 @@
-const express = require('express');
+require('colors');
 require('dotenv').config();
-const { graphqlHTTPLHTTP } = require('express-graphql');
-const port = process.env.PORT || 5000;
+
+const schema = require('./schema/schema');
+const express = require('express');
+const connectDB = require('./config/db');
+const { graphqlHTTP } = require('express-graphql');
+
+const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use('/graphql', graphqlHTTPLHTTP({}));
-app.listen(port, console.log(`Server running on port ${port}`));
+connectDB().then(() => console.log('MongoDB Connected'.cyan.underline.bold));
+
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: process.env.NODE_ENV === 'development',
+  })
+);
+
+app.listen(PORT, (err) => {
+  if (err) console.log('Error in server setup');
+  console.log('Server listening on Port', PORT);
+});
