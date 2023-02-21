@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { DeleteProjectButton } from '../components/DeleteProjectButton';
 import { GET_PROJECT } from '../queries/projectQueries';
 import { Spinner, ClientInfo } from '../components';
 
@@ -14,7 +15,7 @@ export const Project = () => {
   if (error) return <p>Error :(</p>;
 
   const {
-    project: { name, description, status, client },
+    project: { name, description, status, client, id: projectId },
   } = data;
 
   return (
@@ -33,6 +34,8 @@ export const Project = () => {
           <p className={'lead'}>{status}</p>
 
           <ClientInfo client={client} />
+
+          <DeleteProjectButton projectId={projectId} />
         </div>
       )}
     </>
