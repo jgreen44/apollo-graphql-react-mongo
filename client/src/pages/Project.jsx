@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { DeleteProjectButton } from '../components/DeleteProjectButton';
+import { EditProjectForm } from '../components/EditProjectForm';
 import { GET_PROJECT } from '../queries/projectQueries';
 import { Spinner, ClientInfo } from '../components';
 
@@ -34,6 +35,8 @@ export const Project = () => {
           <p className={'lead'}>{status}</p>
 
           <ClientInfo client={client} />
+
+          <EditProjectForm project={data.project} />
 
           <DeleteProjectButton projectId={projectId} />
         </div>
