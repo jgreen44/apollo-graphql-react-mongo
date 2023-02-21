@@ -2,6 +2,7 @@ require('colors');
 require('dotenv').config();
 
 const schema = require('./schema/schema');
+const cors = require('cors');
 const express = require('express');
 const connectDB = require('./config/db');
 const { graphqlHTTP } = require('express-graphql');
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 connectDB().then(() => console.log('MongoDB Connected'.cyan.underline.bold));
+
+app.use(cors());
 
 app.use(
   '/graphql',
