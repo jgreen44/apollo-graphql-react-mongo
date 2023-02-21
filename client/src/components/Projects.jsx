@@ -1,6 +1,5 @@
 import React from 'react';
-import { ProjectCard } from './ProjectCard';
-import { Spinner } from './Spinner';
+import { Spinner, ProjectCard } from './index';
 import { useQuery } from '@apollo/client';
 import { GET_PROJECTS } from '../queries/projectQueries';
 
